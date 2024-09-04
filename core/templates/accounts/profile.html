@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>صفحه پروفایل کاربری :: دریافت شده از وب روبیک</title>
-	<link rel="stylesheet" href="css/bootstrap-rtl.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link type="text/css" href="css/style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="{% static 'profile/css/bootstrap-rtl.css' %}">
+	<link rel="stylesheet" href="{% static 'profile/css/font-awesome.min.css' %}">
+	<link type="text/css" href="{% static 'profile/css/style.css' %}" rel="stylesheet" />
 </head>
 <body class="profile-page" data-spy="scroll" data-target=".navbar" data-offset="50">
 <!-- The HEADER -->
@@ -22,7 +24,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><img src="pics/logo.png"></a>
+					<a class="navbar-brand" href="#"><img src="{% static 'profile/pics/logo.png' %}"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="navigation-example">
 					<ul class="nav navbar-nav navbar-right">
@@ -33,11 +35,11 @@
 			</div>
 		</nav>
 		<!-- Profile Picture -->
-		<img id="profilePic" src="pics/avatar.jpg">
+		<img id="profilePic" src="{% static 'profile/pics/avatar.jpg' %}">
 		<div class="container-fluid" id="subheader">
 			<div class="row" id="row">
 				<div class="col-md-12">
-					<h1 id="name">نام و نام خانوادگی</h1>
+					<h1 id="name">{{user.first_name}} {{user.last_name}}</h1>
 				</div>
 			</div>
 		</div>
@@ -74,15 +76,15 @@
 						<!-- about -->
 						<div id="about" class="tab-pane fade in active">
 							<h3>بیوگرافی</h3>
-							<p><span><i class="fa fa-user-circle"></i><strong>نام:</strong></span> نام و نام خانوادگی </p>
-							<p><span><i class="fa fa-user-circle-o"></i><strong>کد ملی:</strong></span> کد ملی </p>
+							<p><span><i class="fa fa-user-circle"></i><strong>نام و نام خانوادگی:</strong></span> {{user.first_name}} {{user.last_name}}</p>
+							<p><span><i class="fa fa-user-circle-o"></i><strong>کد ملی:</strong></span> {{user.user.national_code}} </p>
 							<!-- <p><span><i class="fa fa-calendar"></i><strong>تاریخ تولد :</strong></span> 1/1/98 </p> -->
-							<p><span><i class="fa fa-envelope"></i><strong>پست الکترونیک :</strong></span> info@webrubik.com </p>
+							<p><span><i class="fa fa-envelope"></i><strong>پست الکترونیک :</strong></span> {{user.email}} </p>
 							<!-- 
 							 -->
-							<p><span><i class="fa fa-phone"></i><strong>شماره تلفن :</strong></span> 07132309534 </p>
-							<p><span><strong>پایه :</strong></span> دهم </p>
-							<p><span><strong>رشته :</strong></span> کامپیوتر </p>
+							<p><span><i class="fa fa-phone"></i><strong>شماره تلفن :</strong></span> {{user.phone_number}} </p>
+							<p><span><strong>پایه :</strong></span> {{user.grade}} </p>
+							<p><span><strong>رشته :</strong></span> {{user.field_of_study}} </p>
 						</div>
 						<!-- adventures and blog -->
 						<div id="adventures" class="tab-pane fade">
@@ -103,7 +105,7 @@
 							<div class="row">
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -111,7 +113,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -119,33 +121,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
-										<div class="caption">
-											<p>صوفی <small>(jpg)</small><p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 col-sm-4 col-xs-4">
-									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
-										<div class="caption">
-											<p>صوفی <small>(jpg)</small><p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
-									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
-										<div class="caption">
-											<p>صوفی <small>(jpg)</small><p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-4 col-xs-4">
-									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -155,7 +131,7 @@
 							<div class="row">
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -163,7 +139,7 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -171,7 +147,33 @@
 								</div>
 								<div class="col-md-4 col-sm-4 col-xs-4">
 									<div class="thumbnail">
-										<img src="pics/chopper.jpg">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
+										<div class="caption">
+											<p>صوفی <small>(jpg)</small><p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="thumbnail">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
+										<div class="caption">
+											<p>صوفی <small>(jpg)</small><p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="thumbnail">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
+										<div class="caption">
+											<p>صوفی <small>(jpg)</small><p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<div class="thumbnail">
+										<img src="{% static 'profile/pics/chopper.jpg' %}">
 										<div class="caption">
 											<p>صوفی <small>(jpg)</small><p>
 										</div>
@@ -260,7 +262,7 @@
 		</div>
 	</footer>
 
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="{% static 'profile/js/jquery-3.1.1.min.js' %}"></script>
+	<script src="{% static 'profile/js/bootstrap.min.js' %}"></script>
 </body><!-- This template has been downloaded from Webrubik.com -->
 </html>
