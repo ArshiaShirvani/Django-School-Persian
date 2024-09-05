@@ -1,10 +1,13 @@
+from django.forms import BaseModelForm
 from django.shortcuts import render,redirect,get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.views import LoginView
 from django.views.generic import DetailView
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from .models import Profile,User
+from django.views.generic.edit import CreateView
+from .forms import UserRegisterForm
 
 def login_view(request):
     if not request.user.is_authenticated:
@@ -14,7 +17,6 @@ def login_view(request):
                user = authenticate(request,username=username, password=password)
                if user is not None:
                     login(request,user)
-                    user_id = user.id
                     # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
                     return HttpResponseRedirect(reverse('accounts:profile-view'))
                     
@@ -35,3 +37,23 @@ def logout_view(request):
         return redirect('/accounts/login')
     else:
         return redirect('/accounts/profile')
+    
+def complete_profile(request):
+    return render (request,'complete-profile.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        form=UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username=request.POST['national_code']   
+            password=request.POST['password']
+            user = authenticate(request,username=username, password=password)
+            if user is not None:
+                login(request,user)
+                return HttpResponseRedirect(reverse('accounts:register-profile', kwargs={"pk": user.pk}))
+    form=UserRegisterForm()
+    return render(request, 'accounts/register.html')
+
+def forget_passwprd_view(request):
+    pass

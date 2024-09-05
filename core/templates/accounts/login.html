@@ -64,7 +64,7 @@
                         <label class="custom-control-label text-light" for="remember-me">به خاطر سپردن</label>
                       </div>
                     </div>
-                    <div class="col-sm text-right"><a class="btn-link text-light" href="forgot-password.html">فراموشی رمز عبور؟</a></div>
+                    <div class="col-sm text-right"><a class="btn-link text-light" href="{% url 'accounts:forget-password-view' %}">فراموشی رمز عبور؟</a></div>
                   </div>
                 </form>
                 <div class="d-flex align-items-center mt-2 mb-3">
@@ -80,7 +80,7 @@
                     <li class="social-icons-linkedin"><a href="#" data-toggle="tooltip" data-original-title="Log In with Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
                   </ul>
                 </div> -->
-                <p class="text-2 text-muted text-center mb-0">حساب ندارید؟ <a class="btn-link text-light text-3" href="register.html">ثبت نام</a></p>
+                <p class="text-2 text-muted text-center mb-0">حساب ندارید؟ <a class="btn-link text-light text-3" href="{% url 'accounts:register-view' %}">ثبت نام</a></p>
               </div>
             </div>
           </div>

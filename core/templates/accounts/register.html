@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html dir="rtl" lang="en">
 <head>
@@ -5,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 <link href="images/favicon.png" rel="icon" />
-<title>صفحه ورود html | نت کپی</title>
+<title>ثبت نام</title>
 <meta name="description" content="Login and Register Form Html Template">
 <meta name="author" content="harnishdesign.net">
 
@@ -15,11 +17,11 @@
 
 <!-- Stylesheet
 ========================= -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/all.min.css" />
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/all.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/stylesheet.css' %}" />
 <!-- Colors Css -->
-<link id="color-switcher" type="text/css" rel="stylesheet" href="css/color-red.css" />
+<link id="color-switcher" type="text/css" rel="stylesheet" href="{% static 'accounts/css/color-red.css' %}" />
 </head>
 <body>
 
@@ -46,15 +48,16 @@
               <div class="hero-mask opacity-9 bg-dark"></div>
               <div class="hero-content text-center">
                 <h4 class="text-white mb-4">فرم ثبت نام</h4><br>
-                <form id="registerForm" class="form-dark" method="post">
+                <form id="registerForm" class="form-dark" method="post" action="{% url 'accounts:register-view' %}">
+                  {% csrf_token %}
                   <div class="form-group icon-group">
-                    <input type="text" class="form-control" id="fullName" required placeholder="کدملی">
+                    <input type="text" class="form-control" id="fullName" required placeholder="کدملی" name="national_code">
                     <span class="icon-inside"><i class="fas fa-user"></i></span> </div>
                   <div class="form-group icon-group">
-                    <input type="password" class="form-control" id="loginPassword" required placeholder="تکرار رمز عبور">
+                    <input type="password" class="form-control" id="loginPassword" required placeholder=" رمز عبور" name="password">
                     <span class="icon-inside"><i class="fas fa-lock"></i></span> </div>
                   <div class="form-group icon-group">
-                    <input type="password" class="form-control" id="loginPassword" required placeholder="تکرار رمز عبور">
+                    <input type="password" class="form-control" id="loginPassword" required placeholder="تکرار رمز عبور" name="password1">
                     <span class="icon-inside"><i class="fas fa-lock"></i></span> </div>
                   <button class="btn btn-primary btn-block mt-4 mb-3" type="submit">ثبت نام</button>
                 </form>
@@ -82,10 +85,10 @@
 </div>
 
 <!-- Script --> 
-<script src="js/jquery.min.js"></script> 
-<script src="js/bootstrap.bundle.min.js"></script> 
+<script src="{% static 'accounts/js/jquery.min.js' %}"></script> 
+<script src="{% static 'accounts/js/bootstrap.bundle.min.js' %}"></script> 
 <!-- Style Switcher --> 
-<script src="js/switcher.min.js"></script> 
-<script src="js/theme.js"></script>
+<script src="{% static 'accounts/js/switcher.min.js' %}"></script> 
+<script src="{% static 'accounts/js/theme.js' %}"></script>
 </body>
 </html>
