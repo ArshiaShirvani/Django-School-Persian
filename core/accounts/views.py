@@ -12,13 +12,14 @@ from .forms import UserRegisterForm
 def login_view(request):
     if not request.user.is_authenticated:
           if request.method=='POST':
-               username=request.POST['username']
-               password=request.POST['password']
-               user = authenticate(request,username=username, password=password)
+               username=request.POST['national_code']
+               password_sent=request.POST['password']
+               user = User.objects.get(national_code=username,password = password_sent)
                if user is not None:
                     login(request,user)
                     # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
-                    return HttpResponseRedirect(reverse('accounts:profile-view'))
+                    # return HttpResponseRedirect(reverse('accounts:profile-view'))
+                    return redirect ('/accounts/profile')
                     
           return render(request,'accounts/login.html')
     else:
@@ -39,7 +40,25 @@ def logout_view(request):
         return redirect('/accounts/profile')
     
 def complete_profile(request):
-    return render(request,'accounts/complete-register.html')
+    if request.user.is_authenticated:
+        user = get_object_or_404(Profile,user_id=request.user.id)
+        if request.method == "POST":
+                first_name = request.POST['first_name']
+                last_name = request.POST['last_name']
+                phone_number = request.POST['phone_number']
+                email = request.POST['email']
+                grade = request.POST['grade']
+                field_of_study = request.POST['field_of_study']
+                user.first_name = first_name
+                user.last_name = last_name
+                user.phone_number = phone_number
+                user.email = email
+                user.grade = grade
+                user.field_of_study = field_of_study
+                user.save()
+                return redirect('/accounts/profile')
+        else:
+            return render(request,'accounts/complete-register.html')
 
 def register_view(request):
     if not request.user.is_authenticated:
