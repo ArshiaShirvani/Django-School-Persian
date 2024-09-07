@@ -6,7 +6,7 @@ from django.views.generic import DetailView
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from .models import Profile,User
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView,FormView
 from .forms import UserRegisterForm
 
 def login_view(request):
@@ -39,21 +39,24 @@ def logout_view(request):
         return redirect('/accounts/profile')
     
 def complete_profile(request):
-    return render (request,'complete-profile.html')
+    return render(request,'accounts/complete-register.html')
 
 def register_view(request):
-    if request.method == 'POST':
-        form=UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username=request.POST['national_code']   
-            password=request.POST['password']
-            user = authenticate(request,username=username, password=password)
-            if user is not None:
-                login(request,user)
-                return HttpResponseRedirect(reverse('accounts:register-profile', kwargs={"pk": user.pk}))
-    form=UserRegisterForm()
-    return render(request, 'accounts/register.html')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+                username_sent = request.POST['national_code']
+                password_sent = request.POST['password']
+                form.save()
+                user = User.objects.get(national_code = username_sent,password = password_sent)
+                if user is not None:
+                    login(request,user)
+                    return redirect('/accounts/complete-profile')
+        form=UserRegisterForm()
+        return render(request,'accounts/register.html')
+    else:
+        return redirect('/accounts/profile')
 
-def forget_passwprd_view(request):
+def forget_password_view(request):
     pass
