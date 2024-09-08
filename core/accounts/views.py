@@ -31,13 +31,15 @@ def user_profile(request):
         user = get_object_or_404(Profile,pk=request.user.id)
         context = {'user':user}
         return render(request,'accounts/profile.html',context)
+    else:
+        return redirect('/accounts/login/')
     
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect('/accounts/login')
+        return redirect('/accounts/login/')
     else:
-        return redirect('/accounts/profile')
+        return redirect('/accounts/login/')
     
 def complete_profile(request):
     if request.user.is_authenticated:
@@ -59,6 +61,8 @@ def complete_profile(request):
                 return redirect('/accounts/profile')
         else:
             return render(request,'accounts/complete-register.html')
+    else:
+        return redirect('/accounts/login/')
 
 def register_view(request):
     if not request.user.is_authenticated:
