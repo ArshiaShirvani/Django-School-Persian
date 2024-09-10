@@ -10,10 +10,4 @@ urlpatterns = [
     path('forget-password',views.forget_password_view,name='forget-password-view'),
     path('signup',views.register_view,name='register-view'),
     path('complete-profile',views.complete_profile,name='register-profile'),
-
-
-
-    # path('login',views.UserRegisterView.as_view(),name='login-view'),
-    # path('login',views.UserCompleteRegisterView.as_view(),name='login-view'),
-    # path('login',views.UserForgetPasswordView.as_view(),name='login-view'),
 ]
