@@ -15,12 +15,8 @@ def login_view(request):
             if request.method=='POST':
                 username_received=request.POST['national_code']
                 password_received=request.POST['password']
-                # user = User.objects.get(national_code=username,password = password_sent)
-                # if user is not None:
-                #     login(request,user)
                 #     # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
                 #     # return HttpResponseRedirect(reverse('accounts:profile-view'))
-                #     return redirect ('/accounts/profile')
                 user = authenticate(national_code=username_received, password=password_received)
                 if user is not None:
                     login(request, user)
