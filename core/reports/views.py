@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView,TemplateView,DetailView
 from accounts.models import Profile
 
+"""show main page of admin panel"""
 def index_view(request):
     return render (request,'admin-panel/index.html')
 
