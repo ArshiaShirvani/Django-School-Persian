@@ -13,18 +13,30 @@ from .forms import UserRegisterForm
 def login_view(request):
     if not request.user.is_authenticated:
             if request.method=='POST':
-                username=request.POST['national_code']
-                password_sent=request.POST['password']
-                user = User.objects.get(national_code=username,password = password_sent)
+                username_received=request.POST['national_code']
+                password_received=request.POST['password']
+                # user = User.objects.get(national_code=username,password = password_sent)
+                # if user is not None:
+                #     login(request,user)
+                #     # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
+                #     # return HttpResponseRedirect(reverse('accounts:profile-view'))
+                #     return redirect ('/accounts/profile')
+                user = authenticate(national_code=username_received, password=password_received)
                 if user is not None:
-                    login(request,user)
-                    # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
-                    # return HttpResponseRedirect(reverse('accounts:profile-view'))
-                    return redirect ('/accounts/profile')
+                    login(request, user)
+                    if user.is_superuser == True:
+                        return redirect('/panel/users')
+                    else:
+                        return redirect ('/accounts/profile')
                     
             return render(request,'accounts/login.html')
     else:
-        return redirect('/accounts/profile')
+        user_id = request.user.id
+        user = User.objects.get(id = user_id)
+        if user.is_superuser == True:
+            return redirect('/panel/users')
+        else:
+            return redirect('/accounts/profile')
         
     
 def user_profile(request):
