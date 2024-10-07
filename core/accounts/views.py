@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from django.views.generic.edit import CreateView,FormView
 
-from .models import Profile,User,UserManager
+from .models import Profile,User
 from .forms import UserRegisterForm
 
 def login_view(request):
