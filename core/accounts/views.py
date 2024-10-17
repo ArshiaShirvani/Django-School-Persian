@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from django.views.generic.edit import CreateView,FormView
 
-from .models import Profile,User,UserManager
+from .models import Profile,User
 from .forms import UserRegisterForm
 
 def login_view(request):
@@ -15,12 +15,8 @@ def login_view(request):
             if request.method=='POST':
                 username_received=request.POST['national_code']
                 password_received=request.POST['password']
-                # user = User.objects.get(national_code=username,password = password_sent)
-                # if user is not None:
-                #     login(request,user)
-                #     # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
-                #     # return HttpResponseRedirect(reverse('accounts:profile-view'))
-                #     return redirect ('/accounts/profile')
+                # return HttpResponseRedirect(reverse('accounts:profile-view', kwargs={"pk": user.national_code}))
+                # return HttpResponseRedirect(reverse('accounts:profile-view'))
                 user = authenticate(national_code=username_received, password=password_received)
                 if user is not None:
                     login(request, user)
