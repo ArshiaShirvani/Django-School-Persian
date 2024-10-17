@@ -28,7 +28,7 @@ def login_view(request):
                         return redirect('/panel/users')
                     else:
                         return redirect ('/accounts/profile')
-                    
+                                                                        
             return render(request,'accounts/login.html')
     else:
         user_id = request.user.id
